@@ -22,12 +22,65 @@
 <html>
 
     <title>Hello World</title>
+	<script src="js/jquery.mobile-1.2.0.min.js"></script>
 </head>
 
 <body>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+		
+		var connectionStatus = false;
+
+    setInterval(function () {
+        connectionStatus = navigator.onLine ? 'online' : 'offline';
+		if(connectionStatus == 'offline'){
+		 alert("No Internet");
+		}
+    }, 100);
+	
+	document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+
+    </script>
+	
+	<style>
+#load{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url("img/loading.gif") no-repeat center center rgba(0,0,0,0.25)
+}
+body{
+margin: 0px;
+}
+
+iframe{
+height: 100vh;
+    margin-bottom: 0px;	
+}
+</style>
+	
+	<div id="load"></div>
+	
+	<div id="contents">
 
 	
-	<iframe src="http://192.99.57.6:46/pages/home.aspx" frameborder="0" scrolling="yes"></iframe>
+	<iframe src="http://192.99.57.6:46/pages/home.aspx" width="100%" height="100%" frameborder="0" scrolling="yes"></iframe>
+	
+	</div>
 
 </body>
 
